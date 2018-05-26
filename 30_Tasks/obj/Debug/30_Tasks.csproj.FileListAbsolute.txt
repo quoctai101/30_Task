@@ -1,0 +1,6 @@
+C:\Users\quoct\source\repos\Exercise4\30_Tasks\bin\Debug\30_Tasks.exe
+C:\Users\quoct\source\repos\Exercise4\30_Tasks\bin\Debug\30_Tasks.pdb
+C:\Users\quoct\source\repos\Exercise4\30_Tasks\obj\Debug\30_Tasks.csprojResolveAssemblyReference.cache
+C:\Users\quoct\source\repos\Exercise4\30_Tasks\obj\Debug\30_Tasks.csproj.CoreCompileInputs.cache
+C:\Users\quoct\source\repos\Exercise4\30_Tasks\obj\Debug\30_Tasks.exe
+C:\Users\quoct\source\repos\Exercise4\30_Tasks\obj\Debug\30_Tasks.pdb
