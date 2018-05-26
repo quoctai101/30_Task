@@ -20,9 +20,13 @@ namespace _30_Tasks
             Console.WriteLine("6.  Optimize Divide 10000d");
             Console.WriteLine("7.  Check Prime");
             Console.WriteLine("8.  Check Prime (detailed)");
-            Console.WriteLine("9.  Perfect Number");
-            Console.WriteLine("10. Check number of integer");
-            Console.WriteLine("11. Show number of integer");
+            Console.WriteLine("9.  Find Prime smaller");
+            Console.WriteLine("10. Check Perfect Square");
+            Console.WriteLine("11. Perfect Number");
+            Console.WriteLine("12. Check number of integer");
+            Console.WriteLine("13. Show number of integer");
+            Console.WriteLine("14. Sum number of integer");
+            Console.WriteLine("15. Max number of integer");
             Console.Write("Your choice: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
@@ -52,13 +56,25 @@ namespace _30_Tasks
                     checkPrimedetailed();
                     break;
                 case 9:
-                    perfectNumber();
+                    findPrime();
                     break;
                 case 10:
-                    checkNumber();
+                    isPerfectSquare();
                     break;
                 case 11:
+                    perfectNumber();
+                    break;
+                case 12:
+                    checkNumber();
+                    break;
+                case 13:
                     showNumber();
+                    break;
+                case 14:
+                    sumNumber();
+                    break;
+                case 15:
+                    maxNumber();
                     break;
                 default:
                     Console.WriteLine("Updating...");
@@ -205,6 +221,49 @@ namespace _30_Tasks
                 else Console.WriteLine("N isn't prime because {0} * {1} = {2}",tmp,n/tmp,n);
             }
         }
+        static void findPrime()
+        {
+            Console.Write("Enter N(>1): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n <= 1) Console.WriteLine("Invalid input!");
+            else
+            {
+                Console.Write("Prime numbers smaller than {0}: ",n);
+                bool[] isPrime = new bool[n+1];
+                isPrime[0] = false;
+                isPrime[1] = false;
+                for(int i = 2; i<=n; i++)
+                {
+                    isPrime[i] = true;
+                }
+                for(int i=2; i*i <= n; i++)
+                {
+                    if (isPrime[i])
+                    {
+                        for (int j = i * i; j <= n; j += i)
+                            isPrime[j] = false;
+                    }
+                }
+                for(int i=2; i <= n; i++)
+                {
+                    if (isPrime[i])
+                        Console.Write(i+" ");
+                }
+                Console.WriteLine();
+            }
+        }
+        static void isPerfectSquare()
+        {
+            Console.Write("Enter N(>=0): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 0) Console.WriteLine("Invalid input!");
+            else
+            {
+                if ((int)Math.Sqrt(n) * (int)Math.Sqrt(n) == n)
+                    Console.WriteLine("N is Perfect Square");
+                else Console.WriteLine("N isn't Perfect Square");
+            }
+        }
         static void perfectNumber()
         {
             Console.Write("Enter N(>1): ");
@@ -261,6 +320,40 @@ namespace _30_Tasks
                         n = n / 10;
                         if (n == 0) Console.WriteLine();
                     }
+            }
+        }
+        static void sumNumber()
+        {
+            Console.Write("Enter N(>=0): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 0) Console.WriteLine("Invalid input!");
+            else
+            {
+                Console.Write("Sum number of {0} is ", n);
+                int sum = 0;
+                while (n != 0)
+                {
+                    sum += n % 10;
+                    n /= 10;
+                }
+                Console.WriteLine("{0}", sum);
+            }
+        }
+        static void maxNumber()
+        {
+            Console.Write("Enter N(>=0): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 0) Console.WriteLine("Invalid input!");
+            else
+            {
+                Console.Write("Max number of {0} is ",n);
+                int max = 0;
+                while (n != 0)
+                {
+                    if (n % 10 > max) max = n % 10;
+                    n /= 10;
+                }
+                Console.WriteLine(max);
             }
         }
     }
