@@ -8,6 +8,20 @@ namespace _30_Tasks
 {
     class Program
     {
+        //Dưới đây là một số func hỗ trợ
+        static bool isPerfectNumber(int x)
+        {
+            int sum = 1;
+            for (int i = 2; i <= Math.Sqrt(x); i++)
+                if (x % i == 0)
+                {
+                    if (i == Math.Sqrt(x)) sum += i;
+                    else sum += i + x / i;
+                }
+            if (sum == x) return true;
+            else return false;
+        }
+        //Main, chủ yếu là menu và gọi các func khác
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to 30 Tasks!");
@@ -29,6 +43,12 @@ namespace _30_Tasks
             Console.WriteLine("15. Max number of integer");
             Console.WriteLine("16. Check Amstrong");
             Console.WriteLine("17. GCD LCM");
+            Console.WriteLine("18. Spell number");
+            Console.WriteLine("19. Take a number from right");
+            Console.WriteLine("20. Take a number from left");
+            Console.WriteLine("21. Find perfect numbers lower than 9000");
+            Console.WriteLine("22. Sum cubed equals to number (from 100 to 999)");
+            Console.WriteLine("23. Show multiplication table");
             Console.Write("Your choice: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
@@ -84,12 +104,31 @@ namespace _30_Tasks
                 case 17:
                     findGCDLCM();
                     break;
+                case 18:
+                    spellNumber();
+                    break;
+                case 19:
+                    takeNumberRight();
+                    break;
+                case 20:
+                    takeNumberLeft();
+                    break;
+                case 21:
+                    perfectNumber9000();
+                    break;
+                case 22:
+                    sumCubed();
+                    break;
+                case 23:
+                    showMultiplyTable();
+                    break;
                 default:
                     Console.WriteLine("Updating...");
                     break;
             }
             Console.ReadKey();
         }
+        //Các func cho từng bài toán
         static void FactorialNumber()
         {
             Console.Write("Enter n: ");
@@ -285,7 +324,6 @@ namespace _30_Tasks
                     {
                         if (i == Math.Sqrt(n)) sum += i;
                         else sum += i + n / i;
-                        break;
                     }
                 if (sum == n) Console.WriteLine(n + " is perfect number!");
                 else Console.WriteLine(n + " isn't perfect number!");
@@ -414,6 +452,97 @@ namespace _30_Tasks
                 }
                 Console.WriteLine("GCD, LCM of {0} and {1} are: {2}, {3}",a,b,x,a*b/x);
             }
+        }
+        static void spellNumber()
+        {
+            Console.Write("Enter N(>=0): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 0) Console.WriteLine("Invalid input!");
+            else
+            {
+                Console.Write("Doc la:");
+                if (n == 0) Console.WriteLine("khong");
+                else
+                {
+                    string[] arrNum = new string[] { "khong", "mot", "hai", "ba", "bon", "nam", "sau", "bay", "tam", "chin" };
+                    string result = "";
+                    while (n != 0)
+                    {
+                        result = arrNum[n % 10] +" "+ result;
+                        n /= 10;
+                    }
+                    Console.WriteLine(result);
+                }
+            }
+        }
+        static void takeNumberRight()
+        {
+            Console.Write("Enter N(>=0): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 0) Console.WriteLine("Invalid input!");
+            else
+            {
+                Console.Write("Which number you want to take (from right): ");
+                int Pos = Convert.ToInt32(Console.ReadLine());
+                if (Pos > n.ToString().Length) Console.WriteLine("Invalid position");
+                else
+                    Console.WriteLine("Number you want is: "+ (n.ToString())[n.ToString().Length-Pos]);
+            }
+        }
+        static void takeNumberLeft()
+        {
+            Console.Write("Enter N(>=0): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 0) Console.WriteLine("Invalid input!");
+            else
+            {
+                Console.Write("Which number you want to take (from right): ");
+                int Pos = Convert.ToInt32(Console.ReadLine());
+                if (Pos > n.ToString().Length) Console.WriteLine("Invalid position");
+                else
+                    Console.WriteLine("Number you want is: " + (n.ToString())[Pos-1]);
+            }
+        }
+        static void perfectNumber9000()
+        {
+            Console.Write("Perfect numbers lower than 9000: ");
+            for(int i = 6; i <= 9000; i++)
+            {
+                if (isPerfectNumber(i)) Console.Write(i+" ");
+            }
+            Console.WriteLine();
+        }
+        static void sumCubed()
+        {
+            for (int i = 153; i <= 999; i++)
+            {
+                int tmp = i;
+                int sum = 0;
+                bool isOver = false;
+                while (tmp != 0)
+                {
+                    sum += (int)Math.Pow(tmp % 10, 3);
+                    if (sum > i)
+                    {
+                        isOver = true;
+                        break;
+                    }
+                    tmp /= 10;
+                }
+                if (isOver == false)
+                    if (sum == i) Console.Write(i+" ");
+            }
+            Console.WriteLine();
+        }
+        static void showMultiplyTable()
+        {
+            for (int i = 1; i <= 9; i++)
+                for (int j = 5; j <= 9; j++)
+                {
+                    if (i == 1) Console.Write(" {0} * {1} =  {2} |",j,i,i*j);
+                    else Console.Write(" {0} * {1} = {2} |", j, i, i * j);
+                    if (j == 9) Console.WriteLine();
+                }
         }
     }
 }
