@@ -405,7 +405,14 @@ namespace _30_Tasks
             if ((a <= 0) || (b <= 0)) Console.WriteLine("Invalid value!");
             else
             {
-
+                int x = a, y = b;
+                while (y!=0)
+                {
+                    int tmp = x % y;
+                    x = y;
+                    y = tmp;
+                }
+                Console.WriteLine("GCD, LCM of {0} and {1} are: {2}, {3}",a,b,x,a*b/x);
             }
         }
     }
