@@ -27,6 +27,8 @@ namespace _30_Tasks
             Console.WriteLine("13. Show number of integer");
             Console.WriteLine("14. Sum number of integer");
             Console.WriteLine("15. Max number of integer");
+            Console.WriteLine("16. Check Amstrong");
+            Console.WriteLine("17. GCD LCM");
             Console.Write("Your choice: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
@@ -75,6 +77,12 @@ namespace _30_Tasks
                     break;
                 case 15:
                     maxNumber();
+                    break;
+                case 16:
+                    isAmstrong();
+                    break;
+                case 17:
+                    findGCDLCM();
                     break;
                 default:
                     Console.WriteLine("Updating...");
@@ -354,6 +362,50 @@ namespace _30_Tasks
                     n /= 10;
                 }
                 Console.WriteLine(max);
+            }
+        }
+        static void isAmstrong()
+        {
+            Console.Write("Enter N(>=1): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 1) Console.WriteLine("Invalid input!");
+            else
+            {
+                byte length = (byte) n.ToString().Length;
+                int tmp = n;
+                int sum = 0;
+                bool isOver = false;
+                while (tmp!= 0)
+                {
+                    sum += (int)Math.Pow(tmp % 10, length);
+                    if (sum > n)
+                    {
+                        isOver = true;
+                        break;
+                    }
+                    tmp /= 10;
+                }
+                if(isOver == false)
+                {
+                    if (sum == n) Console.WriteLine("N is Amstrong Number");
+                    else
+                    {
+                        Console.WriteLine("N isn't Amstrong Number");
+                    }
+                }
+                else Console.WriteLine("N isn't Amstrong Number");
+            }
+        }
+        static void findGCDLCM()
+        {
+            Console.Write("Enter 2 number (>0): ");
+            string[] Input = Console.ReadLine().Split(' ');
+            int a = Convert.ToInt32(Input[0]);
+            int b = Convert.ToInt32(Input[1]);
+            if ((a <= 0) || (b <= 0)) Console.WriteLine("Invalid value!");
+            else
+            {
+
             }
         }
     }
