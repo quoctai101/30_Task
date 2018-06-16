@@ -49,6 +49,13 @@ namespace _30_Tasks
             Console.WriteLine("21. Find perfect numbers lower than 9000");
             Console.WriteLine("22. Sum cubed equals to number (from 100 to 999)");
             Console.WriteLine("23. Show multiplication table");
+            Console.WriteLine("24. Show rectangle");
+            Console.WriteLine("25. Show empty rectangle");
+            Console.WriteLine("26. Show tam giac vuong can");
+            Console.WriteLine("27. Show tam giac can voi chieu cao h");
+            Console.WriteLine("28. Show tam giac can rong voi chieu cao h");
+            Console.WriteLine("29. Show Fibonacci lower than n");
+            Console.WriteLine("30. Calculate sin n");
             Console.Write("Your choice: ");
             int choice = Convert.ToInt32(Console.ReadLine());
             switch (choice)
@@ -121,6 +128,27 @@ namespace _30_Tasks
                     break;
                 case 23:
                     showMultiplyTable();
+                    break;
+                case 24:
+                    showRectangle();
+                    break;
+                case 25:
+                    showEmptyRectangle();
+                    break;
+                case 26:
+                    showVuongCan();
+                    break;
+                case 27:
+                    showCan();
+                    break;
+                case 28:
+                    showEmptyCan();
+                    break;
+                case 29:
+                    showFibo();
+                    break;
+                case 30:
+                    calcSin();
                     break;
                 default:
                     Console.WriteLine("Updating...");
@@ -543,6 +571,135 @@ namespace _30_Tasks
                     else Console.Write(" {0} * {1} = {2} |", j, i, i * j);
                     if (j == 9) Console.WriteLine();
                 }
+        }
+        static void showRectangle()
+        {
+            Console.Write("Enter m, n (>0): ");
+            string[] Input = Console.ReadLine().Split(' ');
+            int m = Convert.ToInt32(Input[0]);
+            int n = Convert.ToInt32(Input[1]);
+            if ((m <= 0) || (n <= 0)) Console.WriteLine("Invalid value!");
+            else
+            {
+                string line = "";
+                for (int i = 0; i < n; i++) line += "* ";
+                for (int i = 0; i < m; i++) Console.WriteLine(line);
+            }
+        }
+        static void showEmptyRectangle()
+        {
+            Console.Write("Enter m, n (>0): ");
+            string[] Input = Console.ReadLine().Split(' ');
+            int m = Convert.ToInt32(Input[0]);
+            int n = Convert.ToInt32(Input[1]);
+            if ((m <= 0) || (n <= 0)) Console.WriteLine("Invalid value!");
+            else
+            {
+                string beginendLine = "";
+                string midLine = "";
+                for (int i = 0; i < n; i++) beginendLine += "* ";
+                for (int i = 0; i < n; i++)
+                {
+                    if (i == 0 || i == n - 1) midLine += "* ";
+                    else midLine += "  ";
+                }
+                for (int i = 0; i < m; i++)
+                {
+                    if (i == 0 || i == m - 1) Console.WriteLine(beginendLine);
+                    else Console.WriteLine(midLine);
+                }
+            }
+        }
+        static void showVuongCan()
+        {
+            Console.Write("Enter do dai canh(>=2): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 2) Console.WriteLine("Invalid input!");
+            else
+            {
+                string line = "";
+                for(int i = 0; i < n; i++)
+                {
+                    line += "* ";
+                    Console.WriteLine(line);
+                }
+            }
+        }
+        static void showCan()
+        {
+            Console.Write("Enter chieu cao tam giac(>=2): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 2) Console.WriteLine("Invalid input!");
+            else
+            {
+                string line = "* ";
+                Console.WriteLine(line);
+                for(int i = 1; i < n; i++)
+                {
+                    line += "* * ";
+                    Console.WriteLine(line);
+                }
+            }
+        }
+        static void showEmptyCan()
+        {
+            Console.Write("Enter chieu cao tam giac(>=2): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 2) Console.WriteLine("Invalid input!");
+            else
+            {
+                int emptySpace = -1;
+                for(int line = 1; line <= n; line++)
+                {
+                    for (int firstSpace = 1; firstSpace <= n - line; firstSpace++)
+                        Console.Write("  ");
+                    Console.Write("* ");
+                    for (int empty = 1; empty <=emptySpace; empty++)
+                        if(line == n) Console.Write("* ");
+                        else Console.Write("  ");
+                    if(line!=1) Console.Write("*");
+                    Console.WriteLine();
+                    emptySpace += 2;
+                }
+            }
+        }
+        static void showFibo()
+        {
+            Console.Write("Enter N(>=1): ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            if (n < 1) Console.WriteLine("Invalid input!");
+            else
+            {
+                int f1 = 0;
+                int f2 = 1;
+                while (f2 <= n)
+                {
+                    Console.Write(f2 + " ");
+                    int tmp = f2;
+                    f2 += f1;
+                    f1 = tmp;
+                }
+                Console.WriteLine();
+
+            }
+        }
+        static void calcSin()
+        {
+            Console.Write("Enter N: ");
+            float n =(float) Convert.ToDouble(Console.ReadLine());
+            n = n * (float) Math.PI / 180;
+            float x = n;
+            float sinx = n;
+            float sinval = (float) Math.Sin(n);
+            int i = 1;
+            BigInteger fact = 1;
+            while(Math.Abs(sinval - sinx) > 0.01)
+            {
+                fact = fact * ++i * ++i;
+                x = -x * n * n;
+                sinx += x / (float) fact;
+            }
+            Console.WriteLine(sinx);
         }
     }
 }
